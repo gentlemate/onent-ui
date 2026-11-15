@@ -46,6 +46,7 @@
     --radius-number-field: var(--oui-radius-number-field, var(--oui-radius-field));
     --radius-popover: var(--oui-radius-popover, var(--oui-radius-popup));
     --radius-progress: var(--oui-radius-progress, var(--oui-radius-pill));
+    --radius-radio-card: var(--oui-radius-radio-card, var(--oui-radius-panel));
     --radius-select: var(--oui-radius-select, var(--oui-radius-field));
     --radius-slider: var(--oui-radius-slider, var(--oui-radius-pill));
     --radius-slider-thumb: var(--oui-radius-slider-thumb, var(--radius-slider));
@@ -70,6 +71,7 @@
     --size-calendar-day: var(--oui-size-calendar-day);
     --spacing-card: var(--oui-spacing-card, var(--oui-spacing-panel));
     --size-checkbox: var(--oui-size-checkbox);
+    --size-radio: var(--oui-size-radio, var(--oui-size-checkbox));
     --height-color-area: var(--oui-height-color-area);
     --height-color-field: var(--oui-height-color-field, var(--oui-height-field));
     --spacing-color-field: var(--oui-spacing-color-field, var(--oui-spacing-field));
@@ -106,6 +108,7 @@
     --spacing-number-field: var(--oui-spacing-number-field, var(--oui-spacing-field));
     --spacing-popover: var(--oui-spacing-popover);
     --height-progress: var(--oui-height-progress);
+    --spacing-radio-card: var(--oui-spacing-radio-card);
     --height-select: var(--oui-height-select, var(--oui-height-field));
     --spacing-select: var(--oui-spacing-select, var(--oui-spacing-field));
     --height-slider: var(--oui-height-slider);

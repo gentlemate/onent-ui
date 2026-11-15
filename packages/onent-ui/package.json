@@ -1,6 +1,6 @@
 {
     "name": "onent-ui",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "description": "Framework-agnostic & themeable Web Components built with Lit.",
     "keywords": [
         "web-components",
@@ -69,6 +69,10 @@
         "./switch": {
             "types": "./dist/components/switch/index.d.ts",
             "import": "./dist/switch.js"
+        },
+        "./radio-group": {
+            "types": "./dist/components/radio-group/index.d.ts",
+            "import": "./dist/radio-group.js"
         },
         "./badge": {
             "types": "./dist/components/badge/index.d.ts",

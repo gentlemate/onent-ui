@@ -1,0 +1,339 @@
+---
+title: Radio group
+description: Picks one option in a list.
+---
+
+import Preview from "../../../components/Preview.astro";
+
+## Import
+
+```js
+import "onent-ui/radio-group";
+import "onent-ui/form-field";
+```
+
+The label, the description, the hint and the error come from [`oui-form-field`](../form-field/).
+
+<Preview
+    stack
+    code={`<oui-form-field label="Plan" description="Choose the plan that fits your needs.">
+    <oui-radio-group value="free">
+        <oui-radio value="free">Free</oui-radio>
+        <oui-radio value="pro">Pro</oui-radio>
+        <oui-radio value="team">Team</oui-radio>
+    </oui-radio-group>
+</oui-form-field>`}
+/>
+
+## Structure
+
+```html
+<oui-radio-group>
+    <oui-radio></oui-radio>
+</oui-radio-group>
+
+<oui-radio-group>
+    <oui-radio-card></oui-radio-card>
+</oui-radio-group>
+```
+
+## Examples
+
+### Orientation
+
+`orientation` sets how the radios are arranged: `vertical` (default) stacks them, and `horizontal` places them side by side, wrapping on several lines if needed.
+
+<Preview
+    stack
+    code={`<oui-form-field label="Plan">
+    <oui-radio-group orientation="horizontal" value="free">
+        <oui-radio value="free">Free</oui-radio>
+        <oui-radio value="pro">Pro</oui-radio>
+        <oui-radio value="team">Team</oui-radio>
+    </oui-radio-group>
+</oui-form-field>`}
+/>
+
+### Card
+
+`oui-radio-card` draws a bordered card around the radio. The border of the checked card takes the primary color. Side by side, the cards share the width equally.
+
+<Preview
+    stack
+    code={`<oui-form-field label="Plan">
+    <oui-radio-group value="free">
+        <oui-radio-card value="free" description="For personal projects.">Free</oui-radio-card>
+        <oui-radio-card value="pro" description="For growing teams.">Pro</oui-radio-card>
+        <oui-radio-card value="team" description="For large organizations.">Team</oui-radio-card>
+    </oui-radio-group>
+</oui-form-field>
+<oui-separator></oui-separator>
+<oui-form-field label="Plan">
+    <oui-radio-group orientation="horizontal" value="free">
+        <oui-radio-card value="free" description="For personal projects.">Free</oui-radio-card>
+        <oui-radio-card value="pro" description="For growing teams.">Pro</oui-radio-card>
+        <oui-radio-card value="team" description="For large organizations.">Team</oui-radio-card>
+    </oui-radio-group>
+</oui-form-field>`}
+/>
+
+### Card icon
+
+`icon` adds a Lucide icon on the side opposite to the circle. `indicator-placement="right"` swaps the circle and the icon.
+
+<Preview
+    stack
+    code={`<oui-form-field label="Plan">
+    <oui-radio-group value="free">
+        <oui-radio-card value="free" description="For personal projects." data-icon="User">Free</oui-radio-card>
+        <oui-radio-card value="pro" description="For growing teams." data-icon="Rocket">Pro</oui-radio-card>
+        <oui-radio-card value="team" description="For large organizations." data-icon="Building2">Team</oui-radio-card>
+    </oui-radio-group>
+</oui-form-field>
+<oui-separator></oui-separator>
+<oui-form-field label="Plan">
+    <oui-radio-group value="free">
+        <oui-radio-card value="free" description="For personal projects." data-icon="User" indicator-placement="right">Free</oui-radio-card>
+        <oui-radio-card value="pro" description="For growing teams." data-icon="Rocket" indicator-placement="right">Pro</oui-radio-card>
+        <oui-radio-card value="team" description="For large organizations." data-icon="Building2" indicator-placement="right">Team</oui-radio-card>
+    </oui-radio-group>
+</oui-form-field>`}
+/>
+
+### Card content
+
+The `content` slot adds custom content at the bottom of the card.
+
+<Preview
+    stack
+    code={`<oui-form-field label="Plan">
+    <oui-radio-group value="free">
+        <oui-radio-card value="free" description="For personal projects.">
+            Free
+            <p slot="content" class="text-lg font-semibold">$0 / month</p>
+        </oui-radio-card>
+        <oui-radio-card value="pro" description="For growing teams.">
+            Pro
+            <p slot="content" class="text-lg font-semibold">$12 / month</p>
+        </oui-radio-card>
+        <oui-radio-card value="team" description="For large organizations.">
+            Team
+            <p slot="content" class="text-lg font-semibold">$49 / month</p>
+        </oui-radio-card>
+    </oui-radio-group>
+</oui-form-field>`}
+/>
+
+### Description
+
+`description` adds a text under the label of a radio.
+
+<Preview
+    stack
+    code={`<oui-form-field label="Plan">
+    <oui-radio-group value="free">
+        <oui-radio value="free" description="For personal projects.">Free</oui-radio>
+        <oui-radio value="pro" description="For growing teams.">Pro</oui-radio>
+        <oui-radio value="team" description="For large organizations.">Team</oui-radio>
+    </oui-radio-group>
+</oui-form-field>`}
+/>
+
+### Disabled
+
+`disabled` applies to the whole group or to a single radio.
+
+<Preview
+    stack
+    code={`<oui-form-field label="Plan">
+    <oui-radio-group value="free" disabled>
+        <oui-radio value="free">Free</oui-radio>
+        <oui-radio value="pro">Pro</oui-radio>
+        <oui-radio value="team">Team</oui-radio>
+    </oui-radio-group>
+</oui-form-field>
+<oui-form-field label="Plan">
+    <oui-radio-group value="free">
+        <oui-radio value="free">Free</oui-radio>
+        <oui-radio value="pro">Pro</oui-radio>
+        <oui-radio value="team" disabled>Team</oui-radio>
+    </oui-radio-group>
+</oui-form-field>`}
+/>
+
+### Invalid
+
+`invalid` marks the field as invalid, without any message. To display a message, use the `error` of [`oui-form-field`](../form-field/#error).
+
+<Preview
+    stack
+    code={`<oui-radio-group invalid>
+    <oui-radio value="free">Free</oui-radio>
+    <oui-radio value="pro">Pro</oui-radio>
+</oui-radio-group>`}
+/>
+
+### Form
+
+`name` submits `value` with the form.
+
+<Preview
+    stack
+    code={`<form onsubmit="event.preventDefault(); this.querySelector('p').textContent = 'plan=' + new FormData(this).get('plan')">
+    <oui-form-field label="Plan">
+        <oui-radio-group name="plan" value="free">
+            <oui-radio value="free">Free</oui-radio>
+            <oui-radio value="pro">Pro</oui-radio>
+            <oui-radio value="team">Team</oui-radio>
+        </oui-radio-group>
+    </oui-form-field>
+    <oui-button type="submit" class="mt-3">Submit</oui-button>
+    <p class="mt-2 text-sm"></p>
+</form>`}
+/>
+
+### Form field
+
+In a form, [`oui-form-field`](../form-field/) adds the label, the hint and the error message.
+
+<Preview
+    stack
+    code={`<oui-form-field label="Plan" hint="You can change it at any time.">
+    <oui-radio-group>
+        <oui-radio value="free">Free</oui-radio>
+        <oui-radio value="pro">Pro</oui-radio>
+    </oui-radio-group>
+</oui-form-field>
+<oui-form-field label="Plan" error="Please choose a plan.">
+    <oui-radio-group>
+        <oui-radio value="free">Free</oui-radio>
+        <oui-radio value="pro">Pro</oui-radio>
+    </oui-radio-group>
+</oui-form-field>`}
+/>
+
+## Behavior
+
+The group is a single tab stop. The arrow keys move the focus and check the radio, skipping the disabled ones and wrapping at the ends. Home and End go to the first and last radios, and Space checks the focused one.
+
+## API
+
+### oui-radio-group
+
+#### Properties
+
+| Property      | Attribute     | Type                         | Default      | Description                                                                                                                                                          |
+| ------------- | ------------- | ---------------------------- | ------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `name`        | `name`        | `string`                     | `""`         | Name submitted with the form                                                                                                                                         |
+| `value`       | `value`       | `string`                     | `""`         | Value of the checked `oui-radio` or `oui-radio-card`                                                                                                                 |
+| `orientation` | `orientation` | `"vertical" \| "horizontal"` | `"vertical"` | Radios stacked (`vertical`) or side by side (`horizontal`), wrapping on several lines if needed. Side by side, the `oui-radio-card` elements share the width equally |
+| `disabled`    | `disabled`    | `boolean`                    | `false`      | Prevents user interaction                                                                                                                                            |
+| `required`    | `required`    | `boolean`                    | `false`      | Marks the group as required for form validation                                                                                                                      |
+| `invalid`     | `invalid`     | `boolean`                    | `false`      | Marks the field as invalid without displaying a message                                                                                                              |
+| `focusTarget` | —             | — (read-only)                | —            | The radio that receives the focus (read-only)                                                                                                                        |
+
+#### Events
+
+| Name     | Description                    |
+| -------- | ------------------------------ |
+| `input`  | The user checked another radio |
+| `change` | The user checked another radio |
+
+#### Slots
+
+| Name      | Description                                  |
+| --------- | -------------------------------------------- |
+| (default) | The `oui-radio` or `oui-radio-card` elements |
+
+#### CSS parts
+
+| Name     | Description               |
+| -------- | ------------------------- |
+| `radios` | The wrapper of the radios |
+
+### oui-radio
+
+#### Properties
+
+| Property      | Attribute     | Type      | Default | Description                                                         |
+| ------------- | ------------- | --------- | ------- | ------------------------------------------------------------------- |
+| `value`       | `value`       | `string`  | `""`    | Value of the radio, submitted by the `oui-radio-group` when checked |
+| `description` | `description` | `string`  | `""`    | Text under the label                                                |
+| `disabled`    | `disabled`    | `boolean` | `false` | Prevents selecting the radio                                        |
+| `checked`     | `checked`     | `boolean` | `false` | Whether the radio is checked (set by the `oui-radio-group`)         |
+| `invalid`     | `invalid`     | `boolean` | `false` | Whether the group is invalid (set by the `oui-radio-group`)         |
+
+#### Slots
+
+| Name      | Description     |
+| --------- | --------------- |
+| (default) | The radio label |
+
+#### CSS custom properties
+
+| Name               | Default                    | Description                    |
+| ------------------ | -------------------------- | ------------------------------ |
+| `--oui-size-radio` | `var(--oui-size-checkbox)` | Width and height of the circle |
+
+#### CSS parts
+
+| Name          | Description                  |
+| ------------- | ---------------------------- |
+| `base`        | The radio wrapper            |
+| `control`     | The circle                   |
+| `indicator`   | The dot of the checked radio |
+| `label`       | The label wrapper            |
+| `description` | The description              |
+
+#### CSS states
+
+| Name      | Description          |
+| --------- | -------------------- |
+| `checked` | The radio is checked |
+
+### oui-radio-card
+
+#### Properties
+
+| Property             | Attribute             | Type                | Default  | Description                                                                        |
+| -------------------- | --------------------- | ------------------- | -------- | ---------------------------------------------------------------------------------- |
+| `icon`               | —                     | `IconNode`          | —        | Lucide icon, set as a JS property. Placed on the side opposite to the circle       |
+| `indicatorPlacement` | `indicator-placement` | `"left" \| "right"` | `"left"` | Side of the circle: `left` puts the icon on the right, `right` puts it on the left |
+| `value`              | `value`               | `string`            | `""`     | Value of the radio, submitted by the `oui-radio-group` when checked                |
+| `description`        | `description`         | `string`            | `""`     | Text under the label                                                               |
+| `disabled`           | `disabled`            | `boolean`           | `false`  | Prevents selecting the radio                                                       |
+| `checked`            | `checked`             | `boolean`           | `false`  | Whether the radio is checked (set by the `oui-radio-group`)                        |
+| `invalid`            | `invalid`             | `boolean`           | `false`  | Whether the group is invalid (set by the `oui-radio-group`)                        |
+
+#### Slots
+
+| Name      | Description                              |
+| --------- | ---------------------------------------- |
+| (default) | The radio label                          |
+| `content` | Custom content at the bottom of the card |
+
+#### CSS custom properties
+
+| Name                       | Default                    | Description                    |
+| -------------------------- | -------------------------- | ------------------------------ |
+| `--oui-size-radio`         | `var(--oui-size-checkbox)` | Width and height of the circle |
+| `--oui-radius-radio-card`  | `var(--oui-radius-panel)`  | Border radius of the card      |
+| `--oui-spacing-radio-card` | `1rem`                     | Padding of the card            |
+
+#### CSS parts
+
+| Name          | Description                                      |
+| ------------- | ------------------------------------------------ |
+| `base`        | The card                                         |
+| `control`     | The circle                                       |
+| `indicator`   | The dot of the checked radio                     |
+| `icon`        | The `oui-icon` rendered from the `icon` property |
+| `label`       | The label wrapper                                |
+| `description` | The description                                  |
+| `content`     | The wrapper of the `content` slot                |
+
+#### CSS states
+
+| Name      | Description          |
+| --------- | -------------------- |
+| `checked` | The radio is checked |

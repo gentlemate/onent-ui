@@ -124,35 +124,37 @@ export class OuiFormField extends OuiElement {
         const hint = this.textOf("hint", this.hint);
         const value = this.control?.valueText;
         const update = () => this.requestUpdate();
-        return html`<div class="text-foreground flex flex-col gap-1.5">
-            <div class="${label || help || value ? "flex" : "hidden"} items-center gap-2">
-                <label part="label" class=${label ? "" : "hidden"} @click=${this.focus}>
-                    <slot name="label" @slotchange=${update}>${this.label}</slot>${
-                        this.required
-                            ? html`<span class="text-destructive ml-0.5" aria-hidden="true">*</span>`
-                            : nothing
-                    }
-                </label>
-                <div class="ml-auto flex items-center gap-2">
-                    ${value ? html`<span part="value" class="text-muted-foreground tabular-nums">${value}</span>` : nothing}
-                    <oui-tooltip content=${this.help} ?disabled=${!help}>
-                        <button
-                            part="help"
-                            type="button"
-                            aria-label=${help}
-                            class="${
-                                help ? "flex" : "hidden"
-                            } text-muted-foreground hover:text-foreground focus-visible:ring-ring/50 cursor-help rounded-full outline-none focus-visible:ring-[3px]"
-                        >
-                            <oui-icon .icon=${CircleQuestionMark}></oui-icon>
-                        </button>
-                        <slot name="help" slot="content" @slotchange=${update}>${this.help}</slot>
-                    </oui-tooltip>
+        return html`<div class="text-foreground flex flex-col gap-2">
+            <div class=${label || help || value || description ? "" : "hidden"}>
+                <div class="${label || help || value ? "flex" : "hidden"} items-center gap-2">
+                    <label part="label" class=${label ? "" : "hidden"} @click=${this.focus}>
+                        <slot name="label" @slotchange=${update}>${this.label}</slot>${
+                            this.required
+                                ? html`<span class="text-destructive ml-0.5" aria-hidden="true">*</span>`
+                                : nothing
+                        }
+                    </label>
+                    <div class="ml-auto flex items-center gap-2">
+                        ${value ? html`<span part="value" class="text-muted-foreground tabular-nums">${value}</span>` : nothing}
+                        <oui-tooltip content=${this.help} ?disabled=${!help}>
+                            <button
+                                part="help"
+                                type="button"
+                                aria-label=${help}
+                                class="${
+                                    help ? "flex" : "hidden"
+                                } text-muted-foreground hover:text-foreground focus-visible:ring-ring/50 cursor-help rounded-full outline-none focus-visible:ring-[3px]"
+                            >
+                                <oui-icon .icon=${CircleQuestionMark}></oui-icon>
+                            </button>
+                            <slot name="help" slot="content" @slotchange=${update}>${this.help}</slot>
+                        </oui-tooltip>
+                    </div>
                 </div>
+                <p part="description" class="${description ? "" : "hidden"} text-muted-foreground text-sm">
+                    <slot name="description" @slotchange=${update}>${this.description}</slot>
+                </p>
             </div>
-            <p part="description" class="${description ? "" : "hidden"} text-muted-foreground text-sm">
-                <slot name="description" @slotchange=${update}>${this.description}</slot>
-            </p>
             <slot @slotchange=${this.onSlotChange} @oui-value-change=${update}></slot>
             ${
                 this.error
