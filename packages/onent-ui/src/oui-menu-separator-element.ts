@@ -9,9 +9,8 @@ export abstract class OuiMenuSeparatorElement extends OuiElement {
                 display: block;
             }
             [part="line"] {
-                height: var(--oui-border-width);
                 margin: var(--oui-spacing-popup) calc(var(--oui-spacing-popup) * -1);
-                background: var(--oui-border);
+                border-top: var(--oui-border-width) solid var(--oui-border);
             }
         `,
     ];

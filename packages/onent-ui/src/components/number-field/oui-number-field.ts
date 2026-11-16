@@ -198,7 +198,7 @@ export class OuiNumberField extends OuiElement {
             spellcheck="false"
             class="${
                 secondary ? "" : "text-center"
-            } placeholder:text-muted-foreground px-number-field min-w-0 flex-1 bg-transparent tabular-nums outline-none disabled:cursor-not-allowed"
+            } placeholder:text-muted-foreground px-number-field w-full min-w-0 flex-1 bg-transparent tabular-nums outline-none disabled:cursor-not-allowed"
             .value=${this.text ?? formatted}
             placeholder=${ifDefined(this.placeholder || undefined)}
             ?disabled=${this.disabled}

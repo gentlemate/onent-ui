@@ -25,14 +25,15 @@ export class OuiSeparator extends OuiElement {
                 width: auto;
             }
             [part="line"] {
-                height: var(--oui-border-width);
                 margin-block: var(--oui-spacing-separator);
-                background: var(--oui-border);
+                border-top: var(--oui-border-width) solid var(--oui-border);
             }
             :host([direction="vertical"]) [part="line"] {
                 height: 100%;
-                width: var(--oui-border-width);
+                width: 0;
                 margin-block: 0;
+                border-top: none;
+                border-left: var(--oui-border-width) solid var(--oui-border);
                 margin-inline: var(--oui-spacing-separator);
             }
         `,
