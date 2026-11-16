@@ -69,7 +69,7 @@ export class OuiRadioCard extends OuiRadioElement {
             ${start}
             <span part="label" class="text-foreground leading-none"><slot></slot></span>
             ${end} ${this.renderDescription(column)}
-            <div part="content" class="${this.hasContent ? column : "hidden"} mt-3">
+            <div part="content" class="${this.hasContent ? column : "hidden"} mt-2">
                 <slot name="content" @slotchange=${this.onContentChange}></slot>
             </div>
         </div>`;
