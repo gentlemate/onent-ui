@@ -31,7 +31,10 @@ export default defineConfig({
                 },
                 {
                     label: "Components",
-                    items: [{ autogenerate: { directory: "components" } }],
+                    items: [
+                        { label: "All components", link: "/all-components/" },
+                        { autogenerate: { directory: "components" } },
+                    ],
                 },
                 {
                     label: "Tools",

@@ -1,0 +1,40 @@
+---
+import StarlightPage from "@astrojs/starlight/components/StarlightPage.astro";
+import { getCollection } from "astro:content";
+import Preview from "../components/Preview.astro";
+
+const pages = await getCollection("docs", ({ id }) => id.startsWith("components/") && id !== "components/label");
+
+const examples = pages
+    .sort((a, b) => a.data.title.localeCompare(b.data.title))
+    .flatMap((page) => {
+        const match = page.body?.match(/<Preview\b([\s\S]*?)code=\{`([\s\S]*?)`\}([\s\S]*?)\/>/);
+        if (!match) return [];
+        const [, before, code, after] = match;
+        return [
+            {
+                title: page.data.title,
+                slug: page.id.replace("components/", ""),
+                href: `/${page.id}/`,
+                code,
+                stack: /\bstack\b/.test(before + after),
+            },
+        ];
+    });
+
+const headings = examples.map(({ title, slug }) => ({ depth: 2, slug, text: title }));
+---
+
+<StarlightPage
+    frontmatter={{ title: "All components", description: "Every component on a single page." }}
+    headings={headings}
+>
+    {examples.map(({ title, slug, href, code, stack }) => (
+        <>
+            <h4 id={slug}>
+                <a href={href}>{title}</a>
+            </h4>
+            <Preview bare stack={stack} code={code} />
+        </>
+    ))}
+</StarlightPage>

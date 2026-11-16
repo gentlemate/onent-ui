@@ -1,0 +1,285 @@
+---
+const skeletons = [28, 13.5, 16.5, 32, 29.5, 30.5, 10.5, 21];
+---
+
+<div class="showcase not-content group bg-background text-foreground font-sans">
+    <div class="columns-1 gap-4 group-data-ready:hidden md:columns-2 2xl:columns-3" aria-hidden="true">
+        {skeletons.map((height) => (
+            <div
+                class="bg-accent rounded-card mb-4 animate-pulse break-inside-avoid motion-reduce:animate-none"
+                style={`height: ${height}rem`}
+            />
+        ))}
+    </div>
+    <div class="columns-1 gap-4 hidden group-data-ready:block md:columns-2 2xl:columns-3 [&>*]:mb-4 [&>*]:break-inside-avoid">
+        <oui-card>
+            <oui-card-content>
+                <oui-tabs value="login">
+                    <oui-tab value="login">Log in</oui-tab>
+                    <oui-tab value="signup">Sign up</oui-tab>
+                    <oui-tab-panel value="login">
+                        <div class="flex flex-col gap-4 pt-2">
+                            <oui-form-field label="Email">
+                                <oui-input type="email" placeholder="you@example.com"></oui-input>
+                            </oui-form-field>
+                            <oui-form-field label="Password">
+                                <oui-input type="password"></oui-input>
+                            </oui-form-field>
+                            <oui-checkbox>Remember me</oui-checkbox>
+                            <oui-button>Log in</oui-button>
+                            <div class="text-muted-foreground flex items-center gap-3 text-sm uppercase">
+                                <oui-separator class="flex-1"></oui-separator>
+                                Or continue with
+                                <oui-separator class="flex-1"></oui-separator>
+                            </div>
+                            <div class="grid grid-cols-2 gap-3">
+                                <oui-button variant="outline" class="[&::part(base)]:w-full">
+                                    Google
+                                </oui-button>
+                                <oui-button variant="outline" class="[&::part(base)]:w-full">
+                                    GitHub
+                                </oui-button>
+                            </div>
+                        </div>
+                    </oui-tab-panel>
+                    <oui-tab-panel value="signup">
+                        <div class="flex flex-col gap-4 pt-2">
+                            <oui-form-field label="Name">
+                                <oui-input placeholder="John Doe"></oui-input>
+                            </oui-form-field>
+                            <oui-form-field label="Email">
+                                <oui-input type="email" placeholder="you@example.com"></oui-input>
+                            </oui-form-field>
+                            <oui-form-field label="Password">
+                                <oui-input type="password"></oui-input>
+                            </oui-form-field>
+                            <oui-checkbox>I agree to the terms and conditions</oui-checkbox>
+                            <oui-button>Create account</oui-button>
+                        </div>
+                    </oui-tab-panel>
+                </oui-tabs>
+            </oui-card-content>
+        </oui-card>
+
+        <oui-card class="[--oui-radius-card:var(--oui-radius-popup)] [--oui-spacing-card:var(--oui-spacing-popup)]">
+            <oui-card-content>
+                <oui-dropdown-group label="Account">
+                    <oui-dropdown-item value="profile" data-icon="User">
+                        Profile
+                    </oui-dropdown-item>
+                    <oui-dropdown-item value="settings" data-icon="Settings">
+                        Settings
+                    </oui-dropdown-item>
+                    <oui-dropdown-item value="notifications" data-icon="Bell">
+                        Notifications
+                    </oui-dropdown-item>
+                </oui-dropdown-group>
+                <oui-dropdown-separator></oui-dropdown-separator>
+                <oui-dropdown-item value="theme" data-icon="SunMoon">
+                    Theme
+                </oui-dropdown-item>
+                <oui-dropdown-separator></oui-dropdown-separator>
+                <oui-dropdown-item value="logout" variant="destructive" data-icon="LogOut">
+                    Log out
+                </oui-dropdown-item>
+            </oui-card-content>
+        </oui-card>
+
+        <oui-card>
+            <oui-card-header>
+                <oui-card-title>Storage</oui-card-title>
+                <oui-card-description>You have used 7.5 GB of your 10 GB.</oui-card-description>
+            </oui-card-header>
+            <oui-card-content>
+                <div class="flex flex-col gap-4">
+                    <oui-progress label="Documents" value="45" format-options='{"style":"percent"}'></oui-progress>
+                    <oui-progress label="Photos" value="20" format-options='{"style":"percent"}'></oui-progress>
+                    <oui-progress label="Videos" value="10" format-options='{"style":"percent"}'></oui-progress>
+                </div>
+            </oui-card-content>
+        </oui-card>
+
+        <oui-card>
+            <oui-card-header>
+                <oui-card-title>Settings</oui-card-title>
+                <oui-card-description>Customize your workspace.</oui-card-description>
+            </oui-card-header>
+            <oui-card-content>
+                <div class="flex flex-col gap-4">
+                    <oui-form-field label="Volume">
+                        <oui-slider value="50"></oui-slider>
+                    </oui-form-field>
+                    <div class="flex flex-col">
+                        <div class="flex items-center justify-between gap-4">
+                            <oui-label
+                                for="settings-email-notifications"
+                                class="text-sm [&::part(base)]:text-muted-foreground"
+                            >
+                                Email notifications
+                            </oui-label>
+                            <oui-switch id="settings-email-notifications" checked></oui-switch>
+                        </div>
+                        <oui-separator></oui-separator>
+                        <div class="flex items-center justify-between gap-4">
+                            <oui-label
+                                for="settings-push-notifications"
+                                class="text-sm [&::part(base)]:text-muted-foreground"
+                            >
+                                Push notifications
+                            </oui-label>
+                            <oui-switch id="settings-push-notifications"></oui-switch>
+                        </div>
+                    </div>
+                    <oui-form-field label="Brand color">
+                        <oui-color-swatch-picker value="#2b7fff">
+                            <oui-color-swatch value="#fb2c36"></oui-color-swatch>
+                            <oui-color-swatch value="#fe9a00"></oui-color-swatch>
+                            <oui-color-swatch value="#00c950"></oui-color-swatch>
+                            <oui-color-swatch value="#2b7fff"></oui-color-swatch>
+                            <oui-color-swatch value="#ad46ff"></oui-color-swatch>
+                            <oui-color-swatch value="#f6339a"></oui-color-swatch>
+                        </oui-color-swatch-picker>
+                    </oui-form-field>
+                    <oui-form-field label="Language">
+                        <oui-select value="en">
+                            <oui-select-option value="en">English</oui-select-option>
+                            <oui-select-option value="fr">Français</oui-select-option>
+                            <oui-select-option value="de">Deutsch</oui-select-option>
+                            <oui-select-option value="es">Español</oui-select-option>
+                        </oui-select>
+                    </oui-form-field>
+                    <oui-form-field label="Items per page">
+                        <oui-number-field value="25" min="10" step="5"></oui-number-field>
+                    </oui-form-field>
+                </div>
+            </oui-card-content>
+        </oui-card>
+
+        <oui-card>
+            <oui-card-header>
+                <oui-card-title>Report an issue</oui-card-title>
+                <oui-card-description>Let us know what went wrong.</oui-card-description>
+            </oui-card-header>
+            <oui-card-content>
+                <div class="flex flex-col gap-4">
+                    <div class="grid grid-cols-2 gap-3">
+                        <oui-form-field label="Date">
+                            <oui-date-picker data-today></oui-date-picker>
+                        </oui-form-field>
+                        <oui-form-field label="Severity">
+                            <oui-select value="2">
+                                <oui-select-option value="1">Low</oui-select-option>
+                                <oui-select-option value="2">Medium</oui-select-option>
+                                <oui-select-option value="3">High</oui-select-option>
+                                <oui-select-option value="4">Critical</oui-select-option>
+                            </oui-select>
+                        </oui-form-field>
+                    </div>
+                    <oui-form-field label="Subject">
+                        <oui-input placeholder="I need help with…"></oui-input>
+                    </oui-form-field>
+                    <oui-form-field label="Description">
+                        <oui-textarea placeholder="Please include any information that could help us understand the issue."></oui-textarea>
+                    </oui-form-field>
+                </div>
+            </oui-card-content>
+            <oui-card-footer>
+                <div class="flex w-full justify-between gap-2">
+                    <oui-button variant="ghost">Cancel</oui-button>
+                    <oui-button>Submit</oui-button>
+                </div>
+            </oui-card-footer>
+        </oui-card>
+
+        <oui-card>
+            <oui-card-header>
+                <oui-card-title>Payment method</oui-card-title>
+                <oui-card-description>Add a new payment method to your account.</oui-card-description>
+            </oui-card-header>
+            <oui-card-content>
+                <div class="flex flex-col gap-4">
+                    <oui-radio-group orientation="horizontal" value="card">
+                        <oui-radio-card value="card" data-icon="CreditCard">
+                            Card
+                        </oui-radio-card>
+                        <oui-radio-card value="bank" data-icon="Landmark">
+                            Bank
+                        </oui-radio-card>
+                    </oui-radio-group>
+                    <oui-form-field label="Name on card">
+                        <oui-input placeholder="John Doe"></oui-input>
+                    </oui-form-field>
+                    <oui-form-field label="Card number">
+                        <oui-input placeholder="1234 5678 9012 3456"></oui-input>
+                    </oui-form-field>
+                    <div class="grid grid-cols-3 gap-3">
+                        <oui-form-field label="Month">
+                            <oui-select placeholder="MM">
+                                {Array.from({ length: 12 }, (_, index) => {
+                                    const month = String(index + 1).padStart(2, "0");
+                                    return <oui-select-option value={month}>{month}</oui-select-option>;
+                                })}
+                            </oui-select>
+                        </oui-form-field>
+                        <oui-form-field label="Year">
+                            <oui-select placeholder="YYYY">
+                                {Array.from({ length: 8 }, (_, index) => {
+                                    const year = String(2026 + index);
+                                    return <oui-select-option value={year}>{year}</oui-select-option>;
+                                })}
+                            </oui-select>
+                        </oui-form-field>
+                        <oui-form-field label="CVC">
+                            <oui-input placeholder="123"></oui-input>
+                        </oui-form-field>
+                    </div>
+                    <oui-checkbox checked>Same as shipping address</oui-checkbox>
+                </div>
+            </oui-card-content>
+        </oui-card>
+
+        <oui-accordion collapsible variant="secondary">
+            <oui-accordion-item value="shipping" data-icon="Package">
+                <span slot="title">What are your shipping options?</span>
+                We offer standard (5-7 days), express (2-3 days) and overnight shipping.
+            </oui-accordion-item>
+            <oui-accordion-item value="returns" data-icon="Undo2">
+                <span slot="title">What is your return policy?</span>
+                Returns are accepted within 30 days of purchase, in their original packaging.
+            </oui-accordion-item>
+            <oui-accordion-item value="support" data-icon="Headset">
+                <span slot="title">How can I contact support?</span>
+                Reach us by email or chat, 24/7.
+            </oui-accordion-item>
+        </oui-accordion>
+
+        <oui-card>
+            <oui-card-content>
+                <div class="flex justify-center">
+                    <oui-calendar value="2026-11-15"></oui-calendar>
+                </div>
+            </oui-card-content>
+        </oui-card>
+    </div>
+</div>
+
+<script>
+    import "onent-ui";
+    import { icons } from "lucide";
+
+    for (const element of document.querySelectorAll<HTMLElement & { icon?: unknown }>(".showcase [data-icon]")) {
+        element.icon = icons[element.dataset.icon as keyof typeof icons];
+    }
+
+    const now = new Date();
+    const today = [now.getFullYear(), now.getMonth() + 1, now.getDate()]
+        .map((part) => String(part).padStart(2, "0"))
+        .join("-");
+    for (const picker of document.querySelectorAll<HTMLElement & { value: string }>(".showcase [data-today]")) {
+        picker.value = today;
+    }
+
+    for (const showcase of document.querySelectorAll<HTMLElement>(".showcase")) {
+        showcase.dataset.ready = "";
+    }
+</script>

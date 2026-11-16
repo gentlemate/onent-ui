@@ -2,7 +2,7 @@
 import ThemeEditor from "./ThemeEditor.astro";
 ---
 
-<oui-drawer id="theme-drawer" modeless resizable size="sm">
+<oui-drawer id="theme-drawer" modeless resizable size="sm" class="[&:not(:defined)]:hidden">
     <oui-drawer-header>
         <oui-drawer-title>Theme</oui-drawer-title>
         <oui-drawer-description>Customize the tokens, then export them as a theme.css.</oui-drawer-description>

@@ -1,31 +1,44 @@
 ---
 import StarlightPage from "@astrojs/starlight/components/StarlightPage.astro";
-import { getCollection } from "astro:content";
-import Preview from "../components/Preview.astro";
-
-const pages = await getCollection("docs", ({ id }) => id.startsWith("components/") && id !== "components/label");
-
-const examples = pages
-    .sort((a, b) => a.data.title.localeCompare(b.data.title))
-    .flatMap((page) => {
-        const match = page.body?.match(/<Preview\b([\s\S]*?)code=\{`([\s\S]*?)`\}([\s\S]*?)\/>/);
-        if (!match) return [];
-        const [, before, code, after] = match;
-        return [{ title: page.data.title, href: `/${page.id}/`, code, stack: /\bstack\b/.test(before + after) }];
-    });
+import Showcase from "../components/Showcase.astro";
 ---
 
 <StarlightPage
-    frontmatter={{ title: "Theme builder", description: "Customize the design tokens and see every component." }}
+    frontmatter={{
+        title: "Theme builder",
+        description: "Build your theme and preview it on real interfaces.",
+        prev: false,
+        next: false,
+    }}
+    hasSidebar={false}
 >
-    <div class="not-content flex flex-col gap-6">
-        {examples.map(({ title, href, code, stack }) => (
-            <section class="flex flex-col gap-2">
-                <a href={href} class="font-medium text-(--sl-color-white) no-underline hover:underline">
-                    {title}
-                </a>
-                <Preview bare stack={stack} code={code} />
-            </section>
-        ))}
-    </div>
+    <Showcase />
 </StarlightPage>
+
+<style is:global>
+    :root:not([data-has-sidebar]) {
+        --sl-content-width: 45rem;
+    }
+
+    main:has(.showcase) > .content-panel:first-child {
+        display: none;
+    }
+
+    main:has(.showcase) > .content-panel + .content-panel {
+        border-top: none;
+    }
+
+    main:has(.showcase) .sl-container {
+        max-width: none;
+    }
+
+    @media (min-width: 72rem) {
+        :root:not([data-has-sidebar]) .right-sidebar-container:has(.theme-builder-sidebar) {
+            flex-shrink: 0;
+            width: max(
+                var(--sl-sidebar-width),
+                calc(var(--sl-sidebar-width) + (100% - 2 * var(--sl-sidebar-width) - var(--sl-content-width)) / 2)
+            );
+        }
+    }
+</style>
