@@ -28,6 +28,7 @@ export default defineConfig({
                 dropdown: "src/components/dropdown/index.ts",
                 popover: "src/components/popover/index.ts",
                 select: "src/components/select/index.ts",
+                combobox: "src/components/combobox/index.ts",
                 modal: "src/components/modal/index.ts",
                 drawer: "src/components/drawer/index.ts",
                 calendar: "src/components/calendar/index.ts",

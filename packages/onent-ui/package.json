@@ -1,6 +1,6 @@
 {
     "name": "onent-ui",
-    "version": "0.2.0",
+    "version": "0.3.0",
     "description": "Framework-agnostic & themeable Web Components built with Lit.",
     "keywords": [
         "web-components",
@@ -109,6 +109,10 @@
         "./popover": {
             "types": "./dist/components/popover/index.d.ts",
             "import": "./dist/popover.js"
+        },
+        "./combobox": {
+            "types": "./dist/components/combobox/index.d.ts",
+            "import": "./dist/combobox.js"
         },
         "./select": {
             "types": "./dist/components/select/index.d.ts",

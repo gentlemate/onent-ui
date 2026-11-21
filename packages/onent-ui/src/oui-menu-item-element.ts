@@ -12,7 +12,8 @@ export abstract class OuiMenuItemElement extends OuiElement {
                 display: block;
                 outline: none;
             }
-            :host(:focus) [part="base"] {
+            :host(:focus) [part="base"],
+            :host([highlighted]) [part="base"] {
                 background: var(--oui-accent);
                 color: var(--oui-accent-foreground);
             }

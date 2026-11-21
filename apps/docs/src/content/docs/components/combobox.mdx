@@ -1,0 +1,303 @@
+---
+title: Combobox
+description: Picks one or several options from a list filtered by typing.
+---
+
+import Preview from "../../../components/Preview.astro";
+
+## Import
+
+```js
+import "onent-ui/combobox";
+import "onent-ui/form-field";
+```
+
+The label, the description, the hint and the error come from [`oui-form-field`](../form-field/).
+
+<Preview
+    stack
+    code={`<oui-form-field label="Framework">
+    <oui-combobox placeholder="Search a framework">
+        <oui-combobox-option value="react">React</oui-combobox-option>
+        <oui-combobox-option value="angular">Angular</oui-combobox-option>
+        <oui-combobox-option value="vue">Vue</oui-combobox-option>
+        <oui-combobox-option value="svelte">Svelte</oui-combobox-option>
+    </oui-combobox>
+</oui-form-field>`}
+/>
+
+## Structure
+
+```html
+<oui-combobox>
+    <oui-combobox-group>
+        <oui-combobox-option></oui-combobox-option>
+    </oui-combobox-group>
+
+    <oui-combobox-option></oui-combobox-option>
+
+    <oui-combobox-separator></oui-combobox-separator>
+</oui-combobox>
+```
+
+## Examples
+
+### Groups
+
+Groups and separators left without any matching option are hidden while filtering.
+
+<Preview
+    stack
+    code={`<oui-form-field label="City">
+    <oui-combobox placeholder="Search a city">
+        <oui-combobox-group label="France">
+            <oui-combobox-option value="paris">Paris</oui-combobox-option>
+            <oui-combobox-option value="marseille">Marseille</oui-combobox-option>
+            <oui-combobox-option value="lyon">Lyon</oui-combobox-option>
+        </oui-combobox-group>
+        <oui-combobox-separator></oui-combobox-separator>
+        <oui-combobox-group label="Spain">
+            <oui-combobox-option value="madrid">Madrid</oui-combobox-option>
+            <oui-combobox-option value="barcelona">Barcelona</oui-combobox-option>
+        </oui-combobox-group>
+    </oui-combobox>
+</oui-form-field>`}
+/>
+
+### Multiple
+
+`multiple` shows the selected options as tags in the field. `value` is then an array, and the form receives one entry per value.
+
+<Preview
+    stack
+    code={`<oui-form-field label="Languages">
+    <oui-combobox multiple placeholder="Search a language">
+        <oui-combobox-option value="js">JavaScript</oui-combobox-option>
+        <oui-combobox-option value="ts">TypeScript</oui-combobox-option>
+        <oui-combobox-option value="py">Python</oui-combobox-option>
+        <oui-combobox-option value="java">Java</oui-combobox-option>
+        <oui-combobox-option value="cs">C#</oui-combobox-option>
+    </oui-combobox>
+</oui-form-field>`}
+/>
+
+### Custom value
+
+`allow-custom-value` accepts the typed text as a value when no option matches it.
+
+<Preview
+    stack
+    code={`<oui-form-field label="Tags">
+    <oui-combobox multiple allow-custom-value placeholder="Add a tag">
+        <oui-combobox-option value="frontend">frontend</oui-combobox-option>
+        <oui-combobox-option value="backend">backend</oui-combobox-option>
+    </oui-combobox>
+</oui-form-field>`}
+/>
+
+### Empty state
+
+`empty-text` changes the message shown when no option matches the query.
+
+<Preview
+    stack
+    code={`<oui-combobox aria-label="Fruit" placeholder="Search a fruit" empty-text="No fruit found.">
+    <oui-combobox-option value="apple">Apple</oui-combobox-option>
+    <oui-combobox-option value="banana">Banana</oui-combobox-option>
+</oui-combobox>`}
+/>
+
+For richer content, the `empty` slot replaces the message.
+
+<Preview
+    stack
+    code={`<oui-combobox aria-label="Fruit" placeholder="Search a fruit">
+    <oui-combobox-option value="apple">Apple</oui-combobox-option>
+    <oui-combobox-option value="banana">Banana</oui-combobox-option>
+    <oui-badge slot="empty" variant="destructive">No fruit found</oui-badge>
+</oui-combobox>`}
+/>
+
+### Custom filtering
+
+`ignore-filter` shows every option whatever the query. Listen to `oui-search` and replace the options yourself, for example with the results of a request.
+
+```js
+combobox.addEventListener("oui-search", async () => {
+    const users = await searchUsers(combobox.query);
+    combobox.replaceChildren(
+        ...users.map((user) => {
+            const option = document.createElement("oui-combobox-option");
+            option.value = user.id;
+            option.textContent = user.name;
+            return option;
+        }),
+    );
+});
+```
+
+### Disabled
+
+<Preview stack code={`<oui-combobox aria-label="Disabled" placeholder="Search a framework" disabled></oui-combobox>`} />
+
+### Invalid
+
+`invalid` marks the field as invalid, without any message. To display a message, use the `error` of [`oui-form-field`](../form-field/#error).
+
+<Preview
+    stack
+    code={`<oui-combobox aria-label="Invalid" placeholder="Select a plan" invalid>
+    <oui-combobox-option value="free">Free</oui-combobox-option>
+    <oui-combobox-option value="pro">Pro</oui-combobox-option>
+</oui-combobox>`}
+/>
+
+### Form field
+
+In a form, [`oui-form-field`](../form-field/) adds the label, the hint and the error message.
+
+<Preview
+    stack
+    code={`<oui-form-field label="Country" hint="Used for shipping.">
+    <oui-combobox placeholder="Search a country">
+        <oui-combobox-option value="fr">France</oui-combobox-option>
+        <oui-combobox-option value="es">Spain</oui-combobox-option>
+    </oui-combobox>
+</oui-form-field>
+<oui-form-field label="Plan" error="You must select a plan." required>
+    <oui-combobox placeholder="Search a plan">
+        <oui-combobox-option value="free">Free</oui-combobox-option>
+        <oui-combobox-option value="pro">Pro</oui-combobox-option>
+    </oui-combobox>
+</oui-form-field>`}
+/>
+
+## Keyboard
+
+The focus stays in the input. Typing opens the listbox and filters the options. <kbd>↑</kbd> / <kbd>↓</kbd> open the listbox and move the highlight, <kbd>Enter</kbd> selects the highlighted option, <kbd>Escape</kbd> closes the listbox and restores the text. With `multiple`, <kbd>Backspace</kbd> in an empty input removes the last tag.
+
+Leaving the field with an empty text clears the selection. Otherwise the text goes back to the selected option, unless `allow-custom-value` is set.
+
+## API
+
+### oui-combobox
+
+#### Properties
+
+| Property           | Attribute            | Type                                                                                                                                                                 | Default          | Description                                                                          |
+| ------------------ | -------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------- | ------------------------------------------------------------------------------------ |
+| `name`             | `name`               | `string`                                                                                                                                                             | `""`             | Name submitted with the form                                                         |
+| `value`            | `value`              | `string \| string[]`                                                                                                                                                 | `""`             | Value of the selected option, or the array of selected values when `multiple` is set |
+| `query`            | `query`              | `string`                                                                                                                                                             | `""`             | Text typed to filter the options                                                     |
+| `placeholder`      | `placeholder`        | `string`                                                                                                                                                             | `""`             | Text shown when nothing is selected or typed                                         |
+| `placement`        | `placement`          | `"top" \| "right" \| "bottom" \| "left" \| "top-start" \| "top-end" \| "right-start" \| "right-end" \| "bottom-start" \| "bottom-end" \| "left-start" \| "left-end"` | `"bottom-start"` | Position of the listbox relative to the field                                        |
+| `distance`         | `distance`           | `number`                                                                                                                                                             | `4`              | Gap in pixels between the field and the listbox                                      |
+| `multiple`         | `multiple`           | `boolean`                                                                                                                                                            | `false`          | Allows selecting several options, shown as tags in the field                         |
+| `ignoreFilter`     | `ignore-filter`      | `boolean`                                                                                                                                                            | `false`          | Shows every option whatever the query, to filter them yourself                       |
+| `allowCustomValue` | `allow-custom-value` | `boolean`                                                                                                                                                            | `false`          | Accepts the typed text as a value, even if no option matches it                      |
+| `openOnFocus`      | `open-on-focus`      | `boolean`                                                                                                                                                            | `false`          | Opens the listbox when the field gets the focus                                      |
+| `emptyText`        | `empty-text`         | `string`                                                                                                                                                             | `"No results."`  | Message shown when no option matches the query, unless the `empty` slot is filled    |
+| `disabled`         | `disabled`           | `boolean`                                                                                                                                                            | `false`          | Prevents user interaction                                                            |
+| `required`         | `required`           | `boolean`                                                                                                                                                            | `false`          | Marks the field as required for form validation                                      |
+| `invalid`          | `invalid`            | `boolean`                                                                                                                                                            | `false`          | Marks the field as invalid without displaying a message                              |
+| `ariaLabel`        | `aria-label`         | `string \| null`                                                                                                                                                     | `null`           | Accessible name of the field, set with the `aria-label` attribute                    |
+| `focusTarget`      | —                    | `HTMLInputElement`                                                                                                                                                   | —                | The inner element that receives the focus (read-only)                                |
+| `open`             | `open`               | `boolean`                                                                                                                                                            | `false`          | Whether it is open. Setting it directly skips `oui-show` / `oui-hide`                |
+
+#### Methods
+
+| Name     | Description                  |
+| -------- | ---------------------------- |
+| `show()` | Opens it (fires `oui-show`)  |
+| `hide()` | Closes it (fires `oui-hide`) |
+
+#### Events
+
+| Name             | Description                                           |
+| ---------------- | ----------------------------------------------------- |
+| `input`          | The user changed the selection                        |
+| `change`         | The user changed the selection                        |
+| `oui-search`     | The user changed the query                            |
+| `oui-show`       | The listbox is about to open. Cancelable              |
+| `oui-after-show` | The listbox is open and its enter animation finished  |
+| `oui-hide`       | The listbox is about to close. Cancelable             |
+| `oui-after-hide` | The listbox is closed and its exit animation finished |
+
+#### Slots
+
+| Name      | Description                                                                           |
+| --------- | ------------------------------------------------------------------------------------- |
+| (default) | The `oui-combobox-option`, `oui-combobox-group` and `oui-combobox-separator` elements |
+| `empty`   | Content shown when no option matches the query, in place of `emptyText`               |
+
+#### CSS custom properties
+
+| Name                     | Default                    | Description                     |
+| ------------------------ | -------------------------- | ------------------------------- |
+| `--oui-height-combobox`  | `var(--oui-height-field)`  | Minimum height of the field     |
+| `--oui-spacing-combobox` | `var(--oui-spacing-field)` | Horizontal padding of the field |
+| `--oui-radius-combobox`  | `var(--oui-radius-field)`  | Border radius of the field      |
+
+#### CSS parts
+
+| Name         | Description                                                 |
+| ------------ | ----------------------------------------------------------- |
+| `field`      | The box holding the tags, the input and the chevron         |
+| `control`    | The inner `<input>` element                                 |
+| `tag`        | The `oui-badge` of a selected value, when `multiple` is set |
+| `tag-remove` | The button removing a tag                                   |
+| `chevron`    | The button toggling the listbox                             |
+| `popup`      | The listbox panel                                           |
+| `empty`      | The wrapper of the `empty` slot                             |
+
+### oui-combobox-option
+
+#### Properties
+
+| Property      | Attribute     | Type      | Default | Description                                                                                  |
+| ------------- | ------------- | --------- | ------- | -------------------------------------------------------------------------------------------- |
+| `selected`    | `selected`    | `boolean` | `false` | Whether the option is selected (set by the `oui-combobox`)                                   |
+| `highlighted` | `highlighted` | `boolean` | `false` | Whether the option is highlighted by the keyboard or the pointer (set by the `oui-combobox`) |
+| `value`       | `value`       | `string`  | `""`    | Value of the option                                                                          |
+| `disabled`    | `disabled`    | `boolean` | `false` | Prevents selecting the option                                                                |
+
+#### Slots
+
+| Name      | Description      |
+| --------- | ---------------- |
+| (default) | The option label |
+
+#### CSS parts
+
+| Name        | Description                           |
+| ----------- | ------------------------------------- |
+| `base`      | The option wrapper                    |
+| `indicator` | The check mark of the selected option |
+
+### oui-combobox-group
+
+#### Properties
+
+| Property | Attribute | Type     | Default | Description                                    |
+| -------- | --------- | -------- | ------- | ---------------------------------------------- |
+| `label`  | `label`   | `string` | `""`    | Heading of the group, also its accessible name |
+
+#### Slots
+
+| Name      | Description                                |
+| --------- | ------------------------------------------ |
+| (default) | The grouped `oui-combobox-option` elements |
+
+#### CSS parts
+
+| Name    | Description                                     |
+| ------- | ----------------------------------------------- |
+| `label` | The group heading, rendered when `label` is set |
+
+### oui-combobox-separator
+
+#### CSS parts
+
+| Name   | Description        |
+| ------ | ------------------ |
+| `line` | The separator line |

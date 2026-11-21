@@ -19,6 +19,7 @@ export * from "./components/tooltip/index.js";
 export * from "./components/dropdown/index.js";
 export * from "./components/popover/index.js";
 export * from "./components/select/index.js";
+export * from "./components/combobox/index.js";
 export * from "./components/modal/index.js";
 export * from "./components/drawer/index.js";
 export * from "./components/calendar/index.js";

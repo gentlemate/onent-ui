@@ -36,6 +36,7 @@
     --radius-color-slider: var(--oui-radius-color-slider, var(--oui-radius-pill));
     --radius-color-swatch: var(--oui-radius-color-swatch, var(--oui-radius-pill));
     --radius-color-thumb: var(--oui-radius-color-thumb, var(--oui-radius-pill));
+    --radius-combobox: var(--oui-radius-combobox, var(--oui-radius-field));
     --radius-date-field: var(--oui-radius-date-field, var(--oui-radius-field));
     --radius-date-picker: var(--oui-radius-date-picker, var(--oui-radius-field));
     --radius-date-range-picker: var(--oui-radius-date-range-picker, var(--oui-radius-field));
@@ -82,6 +83,8 @@
     --height-color-slider: var(--oui-height-color-slider);
     --size-color-swatch: var(--oui-size-color-swatch);
     --size-color-thumb: var(--oui-size-color-thumb);
+    --height-combobox: var(--oui-height-combobox, var(--oui-height-field));
+    --spacing-combobox: var(--oui-spacing-combobox, var(--oui-spacing-field));
     --height-date-field: var(--oui-height-date-field, var(--oui-height-field));
     --spacing-date-field: var(--oui-spacing-date-field, var(--oui-spacing-field));
     --height-date-picker: var(--oui-height-date-picker, var(--oui-height-field));
