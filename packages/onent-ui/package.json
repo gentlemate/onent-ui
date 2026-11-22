@@ -74,6 +74,10 @@
             "types": "./dist/components/radio-group/index.d.ts",
             "import": "./dist/radio-group.js"
         },
+        "./alert": {
+            "types": "./dist/components/alert/index.d.ts",
+            "import": "./dist/alert.js"
+        },
         "./badge": {
             "types": "./dist/components/badge/index.d.ts",
             "import": "./dist/badge.js"

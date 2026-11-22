@@ -12,6 +12,10 @@
     --color-accent: var(--oui-accent);
     --color-accent-foreground: var(--oui-accent-foreground);
     --color-destructive: var(--oui-destructive);
+    --color-info: var(--oui-info);
+    --color-success: var(--oui-success);
+    --color-warning: var(--oui-warning);
+    --color-danger: var(--oui-danger);
     --color-border: var(--oui-border);
     --color-field: var(--oui-field);
     --color-ring: var(--oui-ring);
@@ -26,6 +30,8 @@
     --radius-panel: var(--oui-radius-panel);
     --radius-popup: var(--oui-radius-popup);
     --radius-accordion: var(--oui-radius-accordion, var(--oui-radius-panel));
+    --radius-alert: var(--oui-radius-alert, var(--oui-radius-panel));
+    --radius-alert-close: var(--oui-radius-alert-close, var(--oui-radius-pill));
     --radius-badge: var(--oui-radius-badge, var(--oui-radius-pill));
     --radius-button: var(--oui-radius-button, var(--oui-radius-control));
     --radius-card: var(--oui-radius-card, var(--oui-radius-panel));
@@ -64,6 +70,7 @@
     --spacing-option: var(--oui-spacing-option);
     --spacing-popup: var(--oui-spacing-popup);
     --spacing-accordion: var(--oui-spacing-accordion);
+    --spacing-alert: var(--oui-spacing-alert);
     --height-badge: var(--oui-height-badge);
     --spacing-badge: var(--oui-spacing-badge);
     --height-button: var(--oui-height-button, var(--oui-height-control));

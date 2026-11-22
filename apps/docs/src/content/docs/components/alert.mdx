@@ -1,0 +1,231 @@
+---
+title: Alert
+description: Displays a callout for user attention.
+---
+
+import Preview from "../../../components/Preview.astro";
+
+## Import
+
+```js
+import "onent-ui/alert";
+```
+
+<Preview
+    stack
+    code={`<oui-alert tone="info">
+    <oui-alert-title>New version available</oui-alert-title>
+    <oui-alert-description>Read the changelog to see what's new in this release.</oui-alert-description>
+</oui-alert>`}
+/>
+
+## Structure
+
+```html
+<oui-alert>
+    <oui-alert-title></oui-alert-title>
+    <oui-alert-description></oui-alert-description>
+    <oui-alert-action></oui-alert-action>
+</oui-alert>
+```
+
+## Examples
+
+### Tones
+
+`default` uses the text color, the other tones carry a meaning.
+
+<Preview
+    stack
+    code={`<oui-alert>
+    <oui-alert-title>Default</oui-alert-title>
+</oui-alert>
+<oui-alert tone="info">
+    <oui-alert-title>Info</oui-alert-title>
+</oui-alert>
+<oui-alert tone="success">
+    <oui-alert-title>Success</oui-alert-title>
+</oui-alert>
+<oui-alert tone="warning">
+    <oui-alert-title>Warning</oui-alert-title>
+</oui-alert>
+<oui-alert tone="danger">
+    <oui-alert-title>Danger</oui-alert-title>
+</oui-alert>`}
+/>
+
+### Variants
+
+<Preview
+    stack
+    code={`<oui-alert tone="success">
+    <oui-alert-title>Default</oui-alert-title>
+    <oui-alert-description>A tinted background and border.</oui-alert-description>
+</oui-alert>
+<oui-alert tone="success" variant="secondary">
+    <oui-alert-title>Secondary</oui-alert-title>
+    <oui-alert-description>The secondary background, no border.</oui-alert-description>
+</oui-alert>
+<oui-alert tone="success" variant="outline">
+    <oui-alert-title>Outline</oui-alert-title>
+    <oui-alert-description>The page background with a tinted border.</oui-alert-description>
+</oui-alert>
+<oui-alert tone="success" variant="ghost">
+    <oui-alert-title>Ghost</oui-alert-title>
+    <oui-alert-description>No background nor border.</oui-alert-description>
+</oui-alert>`}
+/>
+
+### Description only
+
+<Preview
+    stack
+    code={`<oui-alert tone="warning">
+    <oui-alert-description>
+        Your session expires in 5 minutes. Save your work to avoid losing it.
+    </oui-alert-description>
+</oui-alert>`}
+/>
+
+### Icon
+
+`icon` sets another Lucide icon, the `icon` slot takes any element and `without-icon` hides it.
+
+<Preview
+    stack
+    code={`<oui-alert tone="info" data-icon="Rocket">
+    <oui-alert-title>Deployment started</oui-alert-title>
+</oui-alert>
+<oui-alert tone="success">
+    <oui-icon slot="icon" data-icon="PartyPopper"></oui-icon>
+    <oui-alert-title>You reached 1,000 users</oui-alert-title>
+</oui-alert>
+<oui-alert without-icon>
+    <oui-alert-title>No icon</oui-alert-title>
+</oui-alert>`}
+/>
+
+### Dismissible
+
+`dismissible` renders a close button. Elements with `data-close` close the alert too, `hide()` closes it from code and `show()` or `open` brings it back.
+
+<Preview
+    stack
+    code={`<oui-alert dismissible>
+    <oui-alert-title>Dismissible</oui-alert-title>
+    <oui-alert-description>Default variant, default tone.</oui-alert-description>
+</oui-alert>
+<oui-alert tone="info" dismissible>
+    <oui-alert-title>Dismissible</oui-alert-title>
+    <oui-alert-description>Default variant, info tone.</oui-alert-description>
+</oui-alert>
+<oui-alert tone="success" variant="secondary" dismissible>
+    <oui-alert-title>Dismissible</oui-alert-title>
+    <oui-alert-description>Secondary variant, success tone.</oui-alert-description>
+</oui-alert>
+<oui-alert tone="warning" variant="outline" dismissible>
+    <oui-alert-title>Dismissible</oui-alert-title>
+    <oui-alert-description>Outline variant, warning tone.</oui-alert-description>
+</oui-alert>
+<oui-alert tone="danger" variant="ghost" dismissible>
+    <oui-alert-title>Dismissible</oui-alert-title>
+    <oui-alert-description>Ghost variant, danger tone.</oui-alert-description>
+</oui-alert>`}
+/>
+
+### Actions
+
+<Preview
+    stack
+    code={`<oui-alert>
+    <oui-alert-title>Tip</oui-alert-title>
+    <oui-alert-description>Press Ctrl + K to open the command palette.</oui-alert-description>
+    <oui-alert-action>
+        <oui-button data-close>Close</oui-button>
+    </oui-alert-action>
+</oui-alert>`}
+/>
+
+## Behavior
+
+- The alert gets `role="alert"` for `warning` and `danger`, and `role="status"` for the other tones: screen readers announce it when it is added to the page or shown again. Use `live` to change it.
+- Each tone has its own icon, so the meaning does not rely on color only. With `without-icon`, say it in the title.
+- When the alert closes while it holds the focus, the focus moves to the next focusable element.
+
+## API
+
+### oui-alert
+
+#### Properties
+
+| Property      | Attribute      | Type                                                        | Default     | Description                                                                                                                                                                                      |
+| ------------- | -------------- | ----------------------------------------------------------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `tone`        | `tone`         | `"default" \| "info" \| "success" \| "warning" \| "danger"` | `"default"` | Meaning of the message: sets the color, the default icon and how it is announced. `default` uses the text color                                                                                  |
+| `variant`     | `variant`      | `"default" \| "secondary" \| "outline" \| "ghost"`          | `"default"` | Visual style                                                                                                                                                                                     |
+| `icon`        | —              | `IconNode`                                                  | —           | Lucide icon, set as a JS property. Defaults to an icon matching the tone                                                                                                                         |
+| `withoutIcon` | `without-icon` | `boolean`                                                   | `false`     | Hides the icon                                                                                                                                                                                   |
+| `dismissible` | `dismissible`  | `boolean`                                                   | `false`     | Renders a close button                                                                                                                                                                           |
+| `open`        | `open`         | `boolean`                                                   | `true`      | Whether the alert is shown. Setting it directly skips `oui-hide`                                                                                                                                 |
+| `closeLabel`  | `close-label`  | `string`                                                    | `"Close"`   | Accessible name of the close button                                                                                                                                                              |
+| `live`        | `live`         | `"off" \| "polite" \| "assertive"`                          | —           | How screen readers announce the alert when it appears: `assertive` (`role="alert"`), `polite` (`role="status"`) or `off`. Defaults to `assertive` for `warning` and `danger`, `polite` otherwise |
+
+#### Methods
+
+| Name     | Description                         |
+| -------- | ----------------------------------- |
+| `hide()` | Closes the alert (fires `oui-hide`) |
+| `show()` | Shows the alert again               |
+
+#### Events
+
+| Name             | Description                                                                    |
+| ---------------- | ------------------------------------------------------------------------------ |
+| `oui-hide`       | The alert is about to close (close button, `data-close`, `hide()`). Cancelable |
+| `oui-after-hide` | The alert is hidden and its exit animation finished                            |
+
+#### Slots
+
+| Name      | Description                                                                                                                               |
+| --------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| (default) | The alert content: `oui-alert-title`, `oui-alert-description` and `oui-alert-action`. Elements with `data-close` close the alert on click |
+| `icon`    | A custom icon, replacing the `icon` property                                                                                              |
+
+#### CSS custom properties
+
+| Name                       | Default                   | Description                       |
+| -------------------------- | ------------------------- | --------------------------------- |
+| `--oui-spacing-alert`      | `1rem`                    | Padding                           |
+| `--oui-radius-alert`       | `var(--oui-radius-panel)` | Border radius                     |
+| `--oui-radius-alert-close` | `var(--oui-radius-pill)`  | Border radius of the close button |
+
+#### CSS parts
+
+| Name           | Description                                                  |
+| -------------- | ------------------------------------------------------------ |
+| `base`         | The alert container                                          |
+| `icon`         | The `oui-icon` rendered from the tone or the `icon` property |
+| `close-button` | The close button (rendered with `dismissible`)               |
+
+### oui-alert-title
+
+#### Slots
+
+| Name      | Description     |
+| --------- | --------------- |
+| (default) | The alert title |
+
+### oui-alert-description
+
+#### Slots
+
+| Name      | Description                             |
+| --------- | --------------------------------------- |
+| (default) | The alert message (text, links, lists…) |
+
+### oui-alert-action
+
+#### Slots
+
+| Name      | Description                                                                             |
+| --------- | --------------------------------------------------------------------------------------- |
+| (default) | Buttons or links under the message. Elements with `data-close` close the alert on click |

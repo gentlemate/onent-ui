@@ -12,6 +12,10 @@
     --oui-accent: oklch(0.97 0 0);
     --oui-accent-foreground: oklch(0.205 0 0);
     --oui-destructive: oklch(0.577 0.245 27.325);
+    --oui-info: oklch(0.546 0.245 262.881);
+    --oui-success: oklch(0.627 0.194 149.214);
+    --oui-warning: oklch(0.666 0.179 58.318);
+    --oui-danger: oklch(0.577 0.245 27.325);
     --oui-border: oklch(0.87 0 0);
     --oui-field: oklch(0.97 0 0);
     --oui-ring: oklch(0.708 0 0);
@@ -35,6 +39,7 @@
     --oui-spacing-panel: 1.25rem;
     --oui-spacing-popup: 0.25rem;
     --oui-spacing-accordion: 1rem;
+    --oui-spacing-alert: 1rem;
     --oui-height-badge: 1.5rem;
     --oui-spacing-badge: 0.5rem;
     --oui-size-calendar-day: 2.25rem;
@@ -93,6 +98,10 @@
     --oui-accent: oklch(0.269 0 0);
     --oui-accent-foreground: oklch(0.985 0 0);
     --oui-destructive: oklch(0.704 0.191 22.216);
+    --oui-info: oklch(0.707 0.165 254.624);
+    --oui-success: oklch(0.792 0.209 151.711);
+    --oui-warning: oklch(0.828 0.189 84.429);
+    --oui-danger: oklch(0.704 0.191 22.216);
     --oui-border: oklch(1 0 0 / 15%);
     --oui-field: oklch(1 0 0 / 8%);
     --oui-ring: oklch(0.556 0 0);

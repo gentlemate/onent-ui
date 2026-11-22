@@ -18,6 +18,7 @@ export default defineConfig({
                 checkbox: "src/components/checkbox/index.ts",
                 switch: "src/components/switch/index.ts",
                 "radio-group": "src/components/radio-group/index.ts",
+                alert: "src/components/alert/index.ts",
                 badge: "src/components/badge/index.ts",
                 card: "src/components/card/index.ts",
                 skeleton: "src/components/skeleton/index.ts",
