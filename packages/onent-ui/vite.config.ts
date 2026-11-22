@@ -19,6 +19,7 @@ export default defineConfig({
                 switch: "src/components/switch/index.ts",
                 "radio-group": "src/components/radio-group/index.ts",
                 alert: "src/components/alert/index.ts",
+                toast: "src/components/toast/index.ts",
                 badge: "src/components/badge/index.ts",
                 card: "src/components/card/index.ts",
                 skeleton: "src/components/skeleton/index.ts",

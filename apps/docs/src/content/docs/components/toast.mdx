@@ -1,0 +1,369 @@
+---
+title: Toast
+description: A short message shown over the page that closes by itself.
+---
+
+import { TabItem, Tabs } from "@astrojs/starlight/components";
+import Preview from "../../../components/Preview.astro";
+
+## Import
+
+<Tabs syncKey="toast">
+    <TabItem label="Imperative">
+
+```js
+import { toast } from "onent-ui/toast";
+```
+
+    </TabItem>
+    <TabItem label="Declarative">
+
+```js
+import "onent-ui/toast";
+```
+
+    </TabItem>
+
+</Tabs>
+
+<Preview
+    syncKey="toast"
+    tabs={{
+        Imperative: `<oui-button onclick="toast({ tone: 'success', title: 'Changes saved', description: 'Your profile is up to date.' })">Save</oui-button>`,
+        Declarative: `<oui-toaster>
+    <oui-toast id="saved" tone="success">
+        <oui-toast-title>Changes saved</oui-toast-title>
+        <oui-toast-description>Your profile is up to date.</oui-toast-description>
+    </oui-toast>
+</oui-toaster>
+<oui-button onclick="document.querySelector('#saved').show()">Save</oui-button>`,
+    }}
+/>
+
+## Structure
+
+```html
+<oui-toaster>
+    <oui-toast>
+        <oui-toast-title></oui-toast-title>
+        <oui-toast-description></oui-toast-description>
+        <oui-toast-action></oui-toast-action>
+    </oui-toast>
+</oui-toaster>
+```
+
+Toasts written in a toaster open with `show()` or `open` and stay in the page once closed. Elements with `data-close` close the toast on click.
+
+`toast()` builds this markup in the first `oui-toaster` of the page (or the first one with its `placement` option) and removes it once the toast is closed. It creates the toaster when the page has none, but place one in the page anyway: screen readers only announce a message reliably when its toaster was already there.
+
+## Examples
+
+### Tones
+
+`default` uses the text color, the other tones carry a meaning.
+
+<Preview
+    syncKey="toast"
+    tabs={{
+        Imperative: `<oui-button onclick="toast({ title: 'Default' })">Default</oui-button>
+<oui-button onclick="toast({ tone: 'info', title: 'Info' })">Info</oui-button>
+<oui-button onclick="toast({ tone: 'success', title: 'Success' })">Success</oui-button>
+<oui-button onclick="toast({ tone: 'warning', title: 'Warning' })">Warning</oui-button>
+<oui-button onclick="toast({ tone: 'danger', title: 'Danger' })">Danger</oui-button>`,
+        Declarative: `<oui-toaster>
+    <oui-toast id="default">
+        <oui-toast-title>Default</oui-toast-title>
+    </oui-toast>
+    <oui-toast id="info" tone="info">
+        <oui-toast-title>Info</oui-toast-title>
+    </oui-toast>
+    <oui-toast id="success" tone="success">
+        <oui-toast-title>Success</oui-toast-title>
+    </oui-toast>
+    <oui-toast id="warning" tone="warning">
+        <oui-toast-title>Warning</oui-toast-title>
+    </oui-toast>
+    <oui-toast id="danger" tone="danger">
+        <oui-toast-title>Danger</oui-toast-title>
+    </oui-toast>
+</oui-toaster>
+<oui-button onclick="document.querySelector('#default').show()">Default</oui-button>
+<oui-button onclick="document.querySelector('#info').show()">Info</oui-button>
+<oui-button onclick="document.querySelector('#success').show()">Success</oui-button>
+<oui-button onclick="document.querySelector('#warning').show()">Warning</oui-button>
+<oui-button onclick="document.querySelector('#danger').show()">Danger</oui-button>`,
+    }}
+/>
+
+### Variants
+
+<Preview
+    syncKey="toast"
+    tabs={{
+        Imperative: `<oui-button onclick="toast({ tone: 'info', title: 'Default', description: 'A tinted background and border.' })">Default</oui-button>
+<oui-button onclick="toast({ tone: 'info', variant: 'secondary', title: 'Secondary', description: 'The secondary background, no border.' })">Secondary</oui-button>
+<oui-button onclick="toast({ tone: 'info', variant: 'outline', title: 'Outline', description: 'The page background with a tinted border.' })">Outline</oui-button>`,
+        Declarative: `<oui-toaster>
+    <oui-toast id="default" tone="info">
+        <oui-toast-title>Default</oui-toast-title>
+        <oui-toast-description>A tinted background and border.</oui-toast-description>
+    </oui-toast>
+    <oui-toast id="secondary" tone="info" variant="secondary">
+        <oui-toast-title>Secondary</oui-toast-title>
+        <oui-toast-description>The secondary background, no border.</oui-toast-description>
+    </oui-toast>
+    <oui-toast id="outline" tone="info" variant="outline">
+        <oui-toast-title>Outline</oui-toast-title>
+        <oui-toast-description>The page background with a tinted border.</oui-toast-description>
+    </oui-toast>
+</oui-toaster>
+<oui-button onclick="document.querySelector('#default').show()">Default</oui-button>
+<oui-button onclick="document.querySelector('#secondary').show()">Secondary</oui-button>
+<oui-button onclick="document.querySelector('#outline').show()">Outline</oui-button>`,
+    }}
+/>
+
+### Icon
+
+`icon` sets another Lucide icon, the `icon` slot takes any element and `without-icon` hides it.
+
+<Preview
+    syncKey="toast"
+    demo="Declarative"
+    tabs={{
+        Imperative: `<oui-button onclick="toast({ tone: 'info', title: 'Deployment started', icon: Rocket })">Icon</oui-button>
+<oui-button onclick="toast({ tone: 'success', title: 'You reached 1,000 users', icon: PartyPopper })">Slot</oui-button>
+<oui-button onclick="toast({ title: 'No icon', withoutIcon: true })">Without icon</oui-button>`,
+        Declarative: `<oui-toaster>
+    <oui-toast id="toast-icon" tone="info" data-icon="Rocket">
+        <oui-toast-title>Deployment started</oui-toast-title>
+    </oui-toast>
+    <oui-toast id="toast-icon-slot" tone="success">
+        <oui-icon slot="icon" data-icon="PartyPopper"></oui-icon>
+        <oui-toast-title>You reached 1,000 users</oui-toast-title>
+    </oui-toast>
+    <oui-toast id="toast-without-icon" without-icon>
+        <oui-toast-title>No icon</oui-toast-title>
+    </oui-toast>
+</oui-toaster>
+<oui-button onclick="document.querySelector('#toast-icon').show()">Icon</oui-button>
+<oui-button onclick="document.querySelector('#toast-icon-slot').show()">Slot</oui-button>
+<oui-button onclick="document.querySelector('#toast-without-icon').show()">Without icon</oui-button>`,
+    }}
+/>
+
+### Placement
+
+`placement` sets where the toaster sits on the screen. The newest toast is the closest to the edge. With `toast()`, the `placement` option picks the toaster with that placement, created if there is none.
+
+<Preview
+    syncKey="toast"
+    tabs={{
+        Imperative: `<oui-button onclick="toast({ title: 'Top start', placement: 'top-start' })">Top start</oui-button>
+<oui-button onclick="toast({ title: 'Top center', placement: 'top-center' })">Top center</oui-button>
+<oui-button onclick="toast({ title: 'Top end', placement: 'top-end' })">Top end</oui-button>
+<oui-button onclick="toast({ title: 'Bottom start', placement: 'bottom-start' })">Bottom start</oui-button>
+<oui-button onclick="toast({ title: 'Bottom center', placement: 'bottom-center' })">Bottom center</oui-button>
+<oui-button onclick="toast({ title: 'Bottom end', placement: 'bottom-end' })">Bottom end</oui-button>`,
+        Declarative: `<oui-toaster placement="top-start">
+    <oui-toast id="toast-top-start"><oui-toast-title>Top start</oui-toast-title></oui-toast>
+</oui-toaster>
+<oui-toaster placement="top-center">
+    <oui-toast id="toast-top-center"><oui-toast-title>Top center</oui-toast-title></oui-toast>
+</oui-toaster>
+<oui-toaster placement="top-end">
+    <oui-toast id="toast-top-end"><oui-toast-title>Top end</oui-toast-title></oui-toast>
+</oui-toaster>
+<oui-toaster placement="bottom-start">
+    <oui-toast id="toast-bottom-start"><oui-toast-title>Bottom start</oui-toast-title></oui-toast>
+</oui-toaster>
+<oui-toaster placement="bottom-center">
+    <oui-toast id="toast-bottom-center"><oui-toast-title>Bottom center</oui-toast-title></oui-toast>
+</oui-toaster>
+<oui-toaster placement="bottom-end">
+    <oui-toast id="toast-bottom-end"><oui-toast-title>Bottom end</oui-toast-title></oui-toast>
+</oui-toaster>
+<oui-button onclick="document.querySelector('#toast-top-start').show()">Top start</oui-button>
+<oui-button onclick="document.querySelector('#toast-top-center').show()">Top center</oui-button>
+<oui-button onclick="document.querySelector('#toast-top-end').show()">Top end</oui-button>
+<oui-button onclick="document.querySelector('#toast-bottom-start').show()">Bottom start</oui-button>
+<oui-button onclick="document.querySelector('#toast-bottom-center').show()">Bottom center</oui-button>
+<oui-button onclick="document.querySelector('#toast-bottom-end').show()">Bottom end</oui-button>`,
+    }}
+/>
+
+### Duration
+
+`duration` sets how long the toast stays open, in milliseconds (5 seconds by default). `0` keeps it open until it is closed.
+
+<Preview
+    syncKey="toast"
+    tabs={{
+        Imperative: `<oui-button onclick="toast({ title: 'Closes after 2 seconds', duration: 2000 })">2 seconds</oui-button>
+<oui-button onclick="toast({ title: 'Stays open', description: 'Close it with the button.', duration: 0 })">Persistent</oui-button>`,
+        Declarative: `<oui-toaster>
+    <oui-toast id="short" duration="2000">
+        <oui-toast-title>Closes after 2 seconds</oui-toast-title>
+    </oui-toast>
+    <oui-toast id="persistent" duration="0">
+        <oui-toast-title>Stays open</oui-toast-title>
+        <oui-toast-description>Close it with the button.</oui-toast-description>
+    </oui-toast>
+</oui-toaster>
+<oui-button onclick="document.querySelector('#short').show()">2 seconds</oui-button>
+<oui-button onclick="document.querySelector('#persistent').show()">Persistent</oui-button>`,
+    }}
+/>
+
+### Actions
+
+`actions` adds buttons under the message, from one action or an array. Each one closes the toast on click. In markup, put them in `oui-toast-action` with `data-close`.
+
+<Preview
+    syncKey="toast"
+    tabs={{
+        Imperative: `<oui-button onclick="toast({ title: 'Invitation received', duration: 0, actions: [{ label: 'Accept', onClick: () => toast('Invitation accepted') }, { label: 'Decline', variant: 'outline', onClick: () => toast('Invitation declined') }] })">Invite</oui-button>`,
+        Declarative: `<oui-toaster>
+    <oui-toast id="invitation" duration="0">
+        <oui-toast-title>Invitation received</oui-toast-title>
+        <oui-toast-action>
+            <oui-button data-close>Accept</oui-button>
+            <oui-button variant="outline" data-close>Decline</oui-button>
+        </oui-toast-action>
+    </oui-toast>
+</oui-toaster>
+<oui-button onclick="document.querySelector('#invitation').show()">Invite</oui-button>`,
+    }}
+/>
+
+## toast()
+
+`toast()` takes a title or an object, and returns the `oui-toast`: `hide()` closes it early.
+
+| Option                                                                                     | Type                                               | Description                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------ | -------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `title`                                                                                    | `string`                                           | The toast title                                                                                                                                                |
+| `description`                                                                              | `string`                                           | The toast message                                                                                                                                              |
+| `actions`                                                                                  | `OuiToastActionOptions \| OuiToastActionOptions[]` | Buttons under the message that close the toast on click. Each action is `{ label: string; variant?: OuiButtonVariant; onClick?: (event: MouseEvent) => void }` |
+| `toaster`                                                                                  | `OuiToaster`                                       | The toaster to show the toast in. Defaults to the first `oui-toaster` of the page, created if needed                                                           |
+| `placement`                                                                                | `OuiToasterPlacement`                              | Shows the toast in the first `oui-toaster` with this placement, created if there is none. Ignored with `toaster`                                               |
+| `tone`, `variant`, `icon`, `withoutIcon`, `withoutClose`, `duration`, `closeLabel`, `live` |                                                    | The [`oui-toast` properties](#oui-toast)                                                                                                                       |
+
+## Behavior
+
+- Toasts never take the focus. The toaster is a landmark region named by `label`, so keyboard and screen reader users can reach it.
+- Screen readers read each toast aloud when it opens. `warning` and `danger` toasts interrupt the current speech (`live="assertive"`), the other tones wait for it to finish (`live="polite"`). Set `live` to change it, or to `off` to stay silent.
+- The timer pauses while the pointer or the focus is on the toasts, and while the page is hidden. Escape closes the focused toast.
+- When more than `max` toasts are open (3 by default), the oldest one closes.
+- A toast can close before the user reaches it: give a toast with an action `duration: 0`, or make the action available elsewhere too.
+- A toast opened while an `oui-modal` is open stays behind the modal.
+
+## API
+
+### oui-toaster
+
+#### Properties
+
+| Property    | Attribute   | Type                                                                                            | Default           | Description                                                                                      |
+| ----------- | ----------- | ----------------------------------------------------------------------------------------------- | ----------------- | ------------------------------------------------------------------------------------------------ |
+| `placement` | `placement` | `"top-start" \| "top-center" \| "top-end" \| "bottom-start" \| "bottom-center" \| "bottom-end"` | `"bottom-end"`    | Corner or edge of the screen where the toasts stack. The newest toast is the closest to the edge |
+| `max`       | `max`       | `number`                                                                                        | `3`               | Maximum number of open toasts: opening one more closes the oldest. `0` removes the limit         |
+| `label`     | `label`     | `string`                                                                                        | `"Notifications"` | Accessible name of the region holding the toasts                                                 |
+
+#### Slots
+
+| Name      | Description              |
+| --------- | ------------------------ |
+| (default) | The `oui-toast` elements |
+
+#### CSS custom properties
+
+| Name                  | Default | Description                           |
+| --------------------- | ------- | ------------------------------------- |
+| `--oui-width-toaster` | `22rem` | Width of the toasts                   |
+| `--oui-inset-toaster` | `1rem`  | Distance from the edges of the screen |
+
+#### CSS parts
+
+| Name   | Description                   |
+| ------ | ----------------------------- |
+| `base` | The region holding the toasts |
+
+### oui-toast
+
+#### Properties
+
+| Property       | Attribute       | Type                                                        | Default     | Description                                                                                                                                                 |
+| -------------- | --------------- | ----------------------------------------------------------- | ----------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `tone`         | `tone`          | `"default" \| "info" \| "success" \| "warning" \| "danger"` | `"default"` | Meaning of the message: sets the color, the default icon and how it is announced. `default` uses the text color                                             |
+| `variant`      | `variant`       | `"default" \| "secondary" \| "outline"`                     | `"default"` | Visual style                                                                                                                                                |
+| `icon`         | —               | `IconNode`                                                  | —           | Lucide icon, set as a JS property. Defaults to an icon matching the tone                                                                                    |
+| `withoutIcon`  | `without-icon`  | `boolean`                                                   | `false`     | Hides the icon                                                                                                                                              |
+| `withoutClose` | `without-close` | `boolean`                                                   | `false`     | Hides the close button                                                                                                                                      |
+| `duration`     | `duration`      | `number`                                                    | `5000`      | Time in milliseconds before the toast closes by itself. `0` keeps it open until it is closed                                                                |
+| `closeLabel`   | `close-label`   | `string`                                                    | `"Close"`   | Accessible name of the close button                                                                                                                         |
+| `live`         | `live`          | `"off" \| "polite" \| "assertive"`                          | —           | How screen readers announce the toast when it opens: `assertive`, `polite` or `off`. Defaults to `assertive` for `warning` and `danger`, `polite` otherwise |
+| `open`         | `open`          | `boolean`                                                   | `false`     | Whether it is open. Setting it directly skips `oui-show` / `oui-hide`                                                                                       |
+
+#### Methods
+
+| Name     | Description                  |
+| -------- | ---------------------------- |
+| `show()` | Opens it (fires `oui-show`)  |
+| `hide()` | Closes it (fires `oui-hide`) |
+
+#### Events
+
+| Name             | Description                                                                                   |
+| ---------------- | --------------------------------------------------------------------------------------------- |
+| `oui-show`       | The toast is about to open. Cancelable                                                        |
+| `oui-after-show` | The toast is open and its enter animation finished                                            |
+| `oui-hide`       | The toast is about to close (close button, `data-close`, Escape, timer, `hide()`). Cancelable |
+| `oui-after-hide` | The toast is hidden and its exit animation finished                                           |
+
+#### Slots
+
+| Name      | Description                                                                                                                               |
+| --------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| (default) | The toast content: `oui-toast-title`, `oui-toast-description` and `oui-toast-action`. Elements with `data-close` close the toast on click |
+| `icon`    | A custom icon, replacing the `icon` property                                                                                              |
+
+#### CSS custom properties
+
+| Name                       | Default                   | Description                       |
+| -------------------------- | ------------------------- | --------------------------------- |
+| `--oui-spacing-toast`      | `1rem`                    | Padding                           |
+| `--oui-radius-toast`       | `var(--oui-radius-panel)` | Border radius                     |
+| `--oui-radius-toast-close` | `var(--oui-radius-pill)`  | Border radius of the close button |
+
+#### CSS parts
+
+| Name           | Description                                                  |
+| -------------- | ------------------------------------------------------------ |
+| `base`         | The toast container                                          |
+| `icon`         | The `oui-icon` rendered from the tone or the `icon` property |
+| `close-button` | The close button (not rendered with `without-close`)         |
+
+### oui-toast-title
+
+#### Slots
+
+| Name      | Description     |
+| --------- | --------------- |
+| (default) | The toast title |
+
+### oui-toast-description
+
+#### Slots
+
+| Name      | Description                             |
+| --------- | --------------------------------------- |
+| (default) | The toast message (text, links, lists…) |
+
+### oui-toast-action
+
+#### Slots
+
+| Name      | Description                                                                             |
+| --------- | --------------------------------------------------------------------------------------- |
+| (default) | Buttons or links under the message. Elements with `data-close` close the toast on click |

@@ -1,25 +1,18 @@
 import { css, html, nothing, type PropertyValues } from "lit";
 import { customElement, property, query, state } from "lit/decorators.js";
-import { CircleAlert, CircleCheck, Info, TriangleAlert, X, type IconNode } from "lucide";
+import { X, type IconNode } from "lucide";
 import { OuiElement } from "../../oui-element.js";
+import { tones, type OuiLive, type OuiTone } from "../../tone.js";
 import "../icon/oui-icon.js";
 
-export type OuiAlertTone = "default" | "info" | "success" | "warning" | "danger";
+export type OuiAlertTone = OuiTone;
 export type OuiAlertVariant = "default" | "secondary" | "outline" | "ghost";
-export type OuiAlertLive = "off" | "polite" | "assertive";
-
-const tones: Record<OuiAlertTone, { icon: IconNode; live: OuiAlertLive; color: string }> = {
-    default: { icon: Info, live: "polite", color: "[--alert-tone:var(--color-foreground)]" },
-    info: { icon: Info, live: "polite", color: "[--alert-tone:var(--color-info)]" },
-    success: { icon: CircleCheck, live: "polite", color: "[--alert-tone:var(--color-success)]" },
-    warning: { icon: TriangleAlert, live: "assertive", color: "[--alert-tone:var(--color-warning)]" },
-    danger: { icon: CircleAlert, live: "assertive", color: "[--alert-tone:var(--color-danger)]" },
-};
+export type OuiAlertLive = OuiLive;
 
 const variants: Record<OuiAlertVariant, string> = {
-    default: "bg-(--alert-tone)/10 border-(--alert-tone)/25 text-foreground",
+    default: "bg-(--tone)/10 border-(--tone)/25 text-foreground",
     secondary: "bg-secondary border-transparent text-secondary-foreground",
-    outline: "bg-background border-(--alert-tone)/40 text-foreground",
+    outline: "bg-background border-(--tone)/40 text-foreground",
     ghost: "border-transparent",
 };
 
@@ -178,7 +171,7 @@ export class OuiAlert extends OuiElement {
             ${
                 this.withoutIcon
                     ? nothing
-                    : html`<span class="flex h-lh shrink-0 items-center text-(--alert-tone)">
+                    : html`<span class="flex h-lh shrink-0 items-center text-(--tone)">
                           <slot name="icon"><oui-icon part="icon" .icon=${this.icon ?? tone.icon}></oui-icon></slot>
                       </span>`
             }
@@ -194,7 +187,7 @@ export class OuiAlert extends OuiElement {
                     part="close-button"
                     type="button"
                     aria-label=${this.closeLabel}
-                    class="focus-visible:ring-ring/50 inline-flex cursor-pointer rounded-[calc(var(--oui-radius-control)-0.125rem)] p-1 opacity-70 transition-opacity outline-none hover:bg-(--alert-tone)/10 hover:opacity-100 focus-visible:opacity-100 focus-visible:ring-[3px]"
+                    class="focus-visible:ring-ring/50 inline-flex cursor-pointer rounded-[calc(var(--oui-radius-control)-0.125rem)] p-1 opacity-70 transition-opacity outline-none hover:bg-(--tone)/10 hover:opacity-100 focus-visible:opacity-100 focus-visible:ring-[3px]"
                     @click=${this.hide}
                 >
                     <oui-icon .icon=${X}></oui-icon>
@@ -205,7 +198,7 @@ export class OuiAlert extends OuiElement {
             part="close-button"
             type="button"
             aria-label=${this.closeLabel}
-            class="focus-visible:ring-ring/50 rounded-alert-close absolute end-(--alert-corner) top-(--alert-corner) inline-flex translate-x-1/2 -translate-y-1/2 cursor-pointer border border-(--alert-tone)/25 bg-[color-mix(in_oklab,var(--alert-tone)_10%,var(--color-background))] p-1 text-(--alert-tone) shadow-xs transition-colors outline-none [--alert-corner:calc(var(--oui-radius-alert,var(--oui-radius-panel))*0.2929)] hover:bg-[color-mix(in_oklab,var(--alert-tone)_20%,var(--color-background))] focus-visible:ring-[3px] rtl:-translate-x-1/2"
+            class="focus-visible:ring-ring/50 rounded-alert-close absolute end-(--alert-corner) top-(--alert-corner) inline-flex translate-x-1/2 -translate-y-1/2 cursor-pointer border border-(--tone)/25 bg-[color-mix(in_oklab,var(--tone)_10%,var(--color-background))] p-1 text-(--tone) shadow-xs transition-colors outline-none [--alert-corner:calc(var(--oui-radius-alert,var(--oui-radius-panel))*0.2929)] hover:bg-[color-mix(in_oklab,var(--tone)_20%,var(--color-background))] focus-visible:ring-[3px] rtl:-translate-x-1/2"
             @click=${this.hide}
         >
             <oui-icon .icon=${X} size="14"></oui-icon>

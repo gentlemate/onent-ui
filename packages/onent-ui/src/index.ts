@@ -10,6 +10,7 @@ export * from "./components/checkbox/index.js";
 export * from "./components/switch/index.js";
 export * from "./components/radio-group/index.js";
 export * from "./components/alert/index.js";
+export * from "./components/toast/index.js";
 export * from "./components/badge/index.js";
 export * from "./components/card/index.js";
 export * from "./components/skeleton/index.js";

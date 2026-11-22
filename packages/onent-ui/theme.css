@@ -40,6 +40,9 @@
     --oui-spacing-popup: 0.25rem;
     --oui-spacing-accordion: 1rem;
     --oui-spacing-alert: 1rem;
+    --oui-spacing-toast: 1rem;
+    --oui-width-toaster: 22rem;
+    --oui-inset-toaster: 1rem;
     --oui-height-badge: 1.5rem;
     --oui-spacing-badge: 0.5rem;
     --oui-size-calendar-day: 2.25rem;

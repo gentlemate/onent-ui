@@ -1,27 +1,43 @@
 ---
-import { Code } from "@astrojs/starlight/components";
+import { Code, TabItem, Tabs } from "@astrojs/starlight/components";
 
-interface Props {
-    code: string;
+type Props = {
+    syncKey?: string;
     stack?: boolean;
     bare?: boolean;
-}
+} & ({ code: string; tabs?: never; demo?: never } | { code?: never; tabs: Record<string, string>; demo?: string });
 
-const { code, stack = false, bare = false } = Astro.props;
+const { syncKey, stack = false, bare = false } = Astro.props;
+const tabs = Astro.props.tabs ?? { Code: Astro.props.code! };
+const code = tabs[Astro.props.demo ?? Object.keys(tabs)[0]];
 
 const iconPattern = /data-icon="(\w+)"/g;
-const icons = [...new Set([...code.matchAll(iconPattern)].map(([, name]) => name))].sort();
+const iconOptionPattern = /\bicon: (\w+)/g;
+const toastPattern = /onclick="(toast\([^"]*\))"/g;
 
-const source = icons.length
-    ? `import { ${icons.join(", ")} } from "lucide";
+function sourceOf(code: string) {
+    const names = [...code.matchAll(iconPattern), ...code.matchAll(iconOptionPattern)].map(([, name]) => name);
+    const icons = [...new Set(names)].sort();
+    const usesToast = code.includes('onclick="toast(');
+    if (!icons.length && !usesToast) return { source: code, lang: "html" };
 
-html\`
-${code.replace(iconPattern, ".icon=$${$1}").replace(/^/gm, "    ")}
-\`;`
-    : code;
+    const markup = code
+        .replace(iconPattern, ".icon=$${$1}")
+        .replace(toastPattern, (_, call: string) => `@click=\${() => ${call.replaceAll("'", '"')}}`);
+    const template = `html\`
+${markup.replace(/^/gm, "    ")}
+\`;`;
+    const source = icons.length ? `import { ${icons.join(", ")} } from "lucide";\n\n${template}` : template;
+    return { source, lang: "js" };
+}
+
+const sources = Object.entries(tabs).map(([name, code]) => ({
+    name,
+    ...sourceOf(code),
+}));
 
 const maxLines = 10;
-const collapsible = source.split("\n").length > maxLines + 5;
+const collapsible = sources.some(({ source }) => source.split("\n").length > maxLines + 5);
 ---
 
 <div class="preview not-content bg-background text-foreground group relative rounded-[0.5rem] border-[1px] border-(--sl-color-gray-5) font-sans">
@@ -54,7 +70,17 @@ const collapsible = source.split("\n").length > maxLines + 5;
         style={`--max-lines: ${maxLines}`}
         data-collapsed={collapsible || undefined}
     >
-        <Code code={source} lang={icons.length ? "js" : "html"} />
+        {sources.length > 1 ? (
+            <Tabs syncKey={syncKey}>
+                {sources.map(({ name, source, lang }) => (
+                    <TabItem label={name}>
+                        <Code code={source} lang={lang} />
+                    </TabItem>
+                ))}
+            </Tabs>
+        ) : (
+            <Code code={sources[0].source} lang={sources[0].lang} />
+        )}
         {collapsible && (
             <div class="group-data-collapsed:from-(--ec-frm-edBg) absolute inset-x-px bottom-px flex justify-center pb-3 group-data-collapsed:bg-linear-to-t group-data-collapsed:pt-16">
                 <oui-button class="preview-code-toggle [--oui-primary-foreground:var(--sl-color-black)] [--oui-primary:var(--sl-color-text-accent)]">
@@ -66,9 +92,10 @@ const collapsible = source.split("\n").length > maxLines + 5;
 )}
 
 <script>
-    import "onent-ui";
-    import type { OuiDrawer } from "onent-ui";
+    import { toast, type OuiDrawer } from "onent-ui";
     import { icons } from "lucide";
+
+    Object.assign(window, { toast });
 
     for (const element of document.querySelectorAll<HTMLElement & { icon?: unknown }>(".preview [data-icon]")) {
         element.icon = icons[element.dataset.icon as keyof typeof icons];

@@ -74,6 +74,10 @@
             "types": "./dist/components/radio-group/index.d.ts",
             "import": "./dist/radio-group.js"
         },
+        "./toast": {
+            "types": "./dist/components/toast/index.d.ts",
+            "import": "./dist/toast.js"
+        },
         "./alert": {
             "types": "./dist/components/alert/index.d.ts",
             "import": "./dist/alert.js"
